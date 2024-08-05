@@ -1,15 +1,20 @@
 import React from 'react';
 import { Header } from '../components/header';
+import { Footer } from '../components/footer';
+import { Hero } from '../components/hero';
+import { Services } from '../components/services';
+import { Reviews } from '../components/reviews';
+import { Portfolio } from '../components/portfolio';
 
 export const Homepage = () => {
   return (
     <div>
       <Header />
-      {/* <Hero />
-      <About />
+      <Hero />
       <Services />
-      <Contact />
-      <Footer /> */}
+      <Reviews />
+      <Portfolio />
+      <Footer />
     </div>
   );
 };
