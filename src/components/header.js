@@ -37,7 +37,7 @@ export const Header = () => {
         <ul className="hidden lg:flex lg:gap-x-12 lg:justify-end">
           <li>
             <Link
-              to="#"
+              to="/"
               className="text-lg font-semibold leading-6 text-gray-900 hover:text-primaryBtn"
             >
               Home
@@ -45,7 +45,7 @@ export const Header = () => {
           </li>
           <li>
             <Link
-              to="#"
+              to="/booking"
               className="text-lg font-semibold leading-6 text-gray-900 hover:text-primaryBtn"
             >
               Bookings
@@ -53,7 +53,7 @@ export const Header = () => {
           </li>
           <li>
             <Link
-              to="#"
+              to="/contact"
               className="text-lg font-semibold leading-6 text-gray-900 hover:text-primaryBtn"
             >
               Contact
@@ -61,7 +61,7 @@ export const Header = () => {
           </li>
           <li>
             <Link
-              to="#"
+              to="/about"
               className="text-lg font-semibold leading-6 text-gray-900 hover:text-primaryBtn"
             >
               About Us
@@ -69,7 +69,7 @@ export const Header = () => {
           </li>
           <li>
             <Link
-              to="#"
+              to="/blog"
               className="text-lg font-semibold leading-6 text-gray-900 hover:text-primaryBtn"
             >
               Blog
@@ -77,7 +77,7 @@ export const Header = () => {
           </li>
           <li>
             <Link
-              to="#"
+              to="/gallery"
               className="text-lg font-semibold leading-6 text-gray-900 hover:text-primaryBtn"
             >
               Gallery

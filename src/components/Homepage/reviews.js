@@ -2,7 +2,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
-import Avatar from '../assets/avatar.webp';
+import Avatar from '../../assets/avatar.webp';
 
 const reviews = [
   {
@@ -44,7 +44,7 @@ export const Reviews = () => {
             <h2 className="text-lg text-gray-500 uppercase mb-2">
               Customer Review
             </h2>
-            <h1 className="text-5xl font-bold mb-6 font-domine">
+            <h1 className="text-5xl font-bold font-serif mb-6 text-pink-500">
               What Our Clients Say
             </h1>
             <p className="text-lg md:text-start text-gray-700 mb-6">
@@ -61,7 +61,10 @@ export const Reviews = () => {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {reviews.map((review, index) => (
-            <div key={index} className="flex flex-col justify-between bg-white rounded-lg shadow-lg p-6">
+            <div
+              key={index}
+              className="flex flex-col justify-between bg-white rounded-lg shadow-lg p-6"
+            >
               <p className="text-gray-700 mb-4 text-start px-4">
                 {review.text}
               </p>
@@ -71,7 +74,7 @@ export const Reviews = () => {
                   alt={review.name}
                   className="w-16 h-16 rounded-full mr-4"
                 />
-                <div className='flex flex-col items-start'>
+                <div className="flex flex-col items-start">
                   <h3 className="text-lg font-bold">{review.name}</h3>
                   <p className="text-sm text-gray-600">{review.role}</p>
                 </div>

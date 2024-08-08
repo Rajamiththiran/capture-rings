@@ -1,8 +1,8 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
-import weddingShoot from '../assets/wedding-shoot.png';
-import graduationShoot from '../assets/graduation-shoot.png';
-import birthdayShoot from '../assets/birthday-shoot.png';
+import weddingShoot from '../../assets/wedding-shoot.png';
+import graduationShoot from '../../assets/graduation-shoot.png';
+import birthdayShoot from '../../assets/birthday-shoot.png';
 
 const services = [
   {
@@ -32,7 +32,7 @@ export const Services = () => {
         <h2 className="text-lg text-gray-500 uppercase mb-2">
           Top Service From Us
         </h2>
-        <h1 className="text-5xl font-bold mb-6 text-pink-500 font-domine">
+        <h1 className="text-5xl font-serif font-bold mb-6 text-pink-500">
           Our Services
         </h1>
         <p className="text-lg mb-12">
@@ -61,7 +61,7 @@ export const Services = () => {
         </div>
         <button
           href="#"
-          className="bg-primaryBtn text-white px-6 py-3 rounded-3xl text-lg"
+          className="bg-primaryBtn text-white font-serif px-6 py-3 rounded-3xl text-lg"
         >
           Book Now
         </button>

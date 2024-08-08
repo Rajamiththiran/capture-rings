@@ -1,13 +1,13 @@
 import React from 'react';
 import Slider from 'react-slick';
-import img1 from '../assets/1.jpg';
-import img2 from '../assets/2.jpg';
-import img3 from '../assets/3.jpg';
-import img4 from '../assets/4.jpg';
-import img5 from '../assets/5.jpg';
-import img6 from '../assets/6.jpg';
-import img7 from '../assets/7.jpg';
-import img8 from '../assets/8.jpg';
+import img1 from '../../assets/1.jpg';
+import img2 from '../../assets/2.jpg';
+import img3 from '../../assets/3.jpg';
+import img4 from '../../assets/4.jpg';
+import img5 from '../../assets/5.jpg';
+import img6 from '../../assets/6.jpg';
+import img7 from '../../assets/7.jpg';
+import img8 from '../../assets/8.jpg';
 
 const portfolioImages = [
     img1,
@@ -55,7 +55,9 @@ export const Portfolio = () => {
         <h2 className="text-lg text-gray-500 uppercase mb-2">
           Stay Up-to-Date
         </h2>
-        <h1 className="text-5xl font-bold mb-6 font-domine">Our Portfolio</h1>
+        <h1 className="text-5xl font-bold font-serif mb-6 text-pink-500">
+          Our Portfolio
+        </h1>
         <Slider {...settings}>
           {portfolioImages.map((image, index) => (
             <div key={index} className="px-2">
