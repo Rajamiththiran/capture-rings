@@ -12,6 +12,8 @@ import { Packages } from './components/AdminDashboard/Packages';
 import { Bookings } from './components/AdminDashboard/Bookings';
 import { Teams } from './components/AdminDashboard/Teams';
 import { BlogManagement } from './components/AdminDashboard/BlogManagement';
+import { EventGalleryManagement } from './components/AdminDashboard/EventGalleryManagement';
+import { EventGallery } from './components/EventGallery';
 
 function App() {
   return (
@@ -23,6 +25,7 @@ function App() {
         <Route path="/blog" element={<Blog />} />
         <Route path="/booking" element={<EventBooking />} />
         <Route path="/gallery" element={<Gallery />} />
+        <Route path="/gallery/:id" element={<EventGallery />} />
         <Route path="/shop" element={<Shop />} />
         {/* Admin Dashboard Routes */}
         <Route path="/admin" element={<Layout />}>
@@ -30,6 +33,10 @@ function App() {
           <Route path="packages" element={<Packages />} />
           <Route path="bookings" element={<Bookings />} />
           <Route path="blog-management" element={<BlogManagement />} />
+          <Route
+            path="event-gallery-management"
+            element={<EventGalleryManagement />}
+          />
           {/* Add more admin routes as needed */}
         </Route>
       </Routes>

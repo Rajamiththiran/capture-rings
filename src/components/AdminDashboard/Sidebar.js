@@ -24,6 +24,11 @@ const Sidebar = () => {
             Blog Management
           </Link>
         </li>
+        <li className="mb-4">
+          <Link to="/admin/event-gallery-management" className="text-lg">
+            Event Gallery Management
+          </Link>
+        </li>
         {/* Add more sidebar items here */}
       </ul>
     </aside>
