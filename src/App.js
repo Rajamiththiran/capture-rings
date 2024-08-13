@@ -6,6 +6,11 @@ import { AboutUs } from './pages/AboutUs';
 import { Blog } from './pages/Blog';
 import { EventBooking } from './pages/EventBooking';
 import { Gallery } from './pages/Gallery';
+import { Shop } from './pages/Shop';
+import { Layout } from './components/AdminDashboard/Layout';
+import { Packages } from './components/AdminDashboard/Packages';
+import { Bookings } from './components/AdminDashboard/Bookings';
+import { Teams } from './components/AdminDashboard/Teams';
 
 function App() {
   return (
@@ -16,7 +21,15 @@ function App() {
         <Route path="/about" element={<AboutUs />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/booking" element={<EventBooking />} />
-        <Route path='/gallery' element={<Gallery />} />
+        <Route path="/gallery" element={<Gallery />} />
+        <Route path="/shop" element={<Shop />} />
+        {/* Admin Dashboard Routes */}
+        <Route path="/admin" element={<Layout />}>
+          <Route path="teams" element={<Teams />} />
+          <Route path="packages" element={<Packages />} />
+          <Route path="bookings" element={<Bookings />} />
+          {/* Add more admin routes as needed */}
+        </Route>
       </Routes>
     </BrowserRouter>
   );

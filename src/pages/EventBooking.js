@@ -10,8 +10,8 @@ import { Footer } from '../components/footer';
 export const EventBooking = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const [formData, setFormData] = useState({
-    packageName: '',
-    packagePrice: '',
+    title: '',
+    price: '',
     date: '',
     time: '',
     fname: '',

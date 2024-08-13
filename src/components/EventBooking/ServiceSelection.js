@@ -1,39 +1,42 @@
-import React, { useState } from 'react';
-
-// Separate the package data
-const packages = [
-  {
-    id: 1,
-    team: 'Team 1',
-    name: 'Wedding Shoot',
-    duration: '3h',
-    price: '35,000.00',
-  },
-  {
-    id: 2,
-    team: 'Team 1',
-    name: 'Engagement Shoot',
-    duration: '2h',
-    price: '25,000.00',
-  },
-  {
-    id: 3,
-    team: 'Team 2',
-    name: 'Graduation Shoot',
-    duration: '1h',
-    price: '10,000.00',
-  },
-  {
-    id: 4,
-    team: 'Team 2',
-    name: 'Portrait Shoot',
-    duration: '2h',
-    price: '15,000.00',
-  },
-];
+import React, { useState, useEffect } from 'react';
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from '../../firebase/firebase-config';
 
 export const ServiceSelection = ({ formData, setFormData, nextStep }) => {
+  const [packages, setPackages] = useState([]);
+  const [teams, setTeams] = useState([]);
   const [selectedTeam, setSelectedTeam] = useState('All');
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // Fetch packages
+        const packagesSnapshot = await getDocs(collection(db, 'packages'));
+        const fetchedPackages = packagesSnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setPackages(fetchedPackages);
+
+        // Fetch teams
+        const teamsSnapshot = await getDocs(collection(db, 'teams'));
+        const fetchedTeams = teamsSnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setTeams(fetchedTeams);
+      } catch (err) {
+        setError('Failed to load data');
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   // Filter the packages based on the selected team
   const filteredPackages =
@@ -44,8 +47,10 @@ export const ServiceSelection = ({ formData, setFormData, nextStep }) => {
   const handleSelectPackage = (pkg) => {
     setFormData({
       ...formData,
-      packageName: pkg.name,
-      packagePrice: pkg.price,
+      title: pkg.title,
+      price: pkg.price,
+      team: pkg.team,
+      duration: pkg.duration,
     });
     nextStep();
   };
@@ -56,9 +61,9 @@ export const ServiceSelection = ({ formData, setFormData, nextStep }) => {
         <h2 className="text-lg font-semibold mb-4">Select Category</h2>
         {/* Filter Buttons */}
         <div className="mb-4">
-          {['All', 'Team 1', 'Team 2'].map((team) => (
+          {['All', ...teams.map((team) => team.name)].map((team) => (
             <button
-              key={team} 
+              key={team}
               className={`px-4 py-1 rounded-lg mx-2 ${
                 selectedTeam === team
                   ? 'border-2 border-primaryBtn bg-white text-primaryBtn'
@@ -73,19 +78,26 @@ export const ServiceSelection = ({ formData, setFormData, nextStep }) => {
       </div>
       {/* Packages */}
       <h2 className="text-lg font-semibold mb-4">Select Service</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {filteredPackages.map((pkg) => (
-          <div
-            key={pkg.id} 
-            className="p-4 border rounded-lg cursor-pointer hover:bg-gray-100"
-            onClick={() => handleSelectPackage(pkg)}
-          >
-            <h3 className="text-lg font-semibold">{pkg.name}</h3>
-            <p>Duration: {pkg.duration}</p>
-            <p>Price: {pkg.price}</p>
-          </div>
-        ))}
-      </div>
+      {loading ? (
+        <p>Loading packages...</p>
+      ) : error ? (
+        <p className="text-red-500">{error}</p>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {filteredPackages.map((pkg) => (
+            <div
+              key={pkg.id}
+              className="p-4 border rounded-lg cursor-pointer hover:bg-gray-100"
+              onClick={() => handleSelectPackage(pkg)}
+            >
+              <h3 className="text-lg font-semibold">{pkg.title}</h3>
+              <p>{pkg.description}</p>
+              <p>Duration: {pkg.duration}</p>
+              <p>Price: {pkg.price}</p>
+            </div>
+          ))}
+        </div>
+      )}
 
       <div className="border w-full my-4"></div>
       <div className="flex justify-end">

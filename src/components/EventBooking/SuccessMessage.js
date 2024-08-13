@@ -2,6 +2,7 @@ import React from 'react';
 import { CommentSection } from './CommentSection';
 
 export const SuccessMessage = ({ formData }) => {
+
   return (
     <>
       <div className="text-center">
@@ -16,7 +17,7 @@ export const SuccessMessage = ({ formData }) => {
         <div className="container font-serif mx-auto px-6 md:px-36 my-8 flex flex-col md:flex-row items-center justify-center text-center md:text-left text-gray-800 gap-4">
           <div className="flex flex-col items-center mb-6 md:mb-0">
             <p>Service:</p>
-            <p className="font-bold">{formData.packageName}</p>
+            <p className="font-bold">{formData.title}</p>
           </div>
           <div className="border border-l-2 md:h-24"></div>
           <div className="border border-l-2 w-32 md:w-0 mb-4"></div>

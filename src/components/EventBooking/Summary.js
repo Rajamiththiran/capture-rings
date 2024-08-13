@@ -1,12 +1,29 @@
+import { doc, setDoc } from 'firebase/firestore';
 import React from 'react';
+import { db } from '../../firebase/firebase-config';
 
 export const Summary = ({ formData, nextStep, prevStep }) => {
-  const handleConfirm = () => {
-    // Simulate a successful booking
-    nextStep();
-  };
+  const handleConfirm = async (e) => {
+    e.preventDefault();
+    try {
+      const docRef = doc(
+        db,
+        'appointments',
+        `${formData.email}-${formData.date}-${new Date().getDate()}`
+      );
 
-  
+      await setDoc(docRef, {
+        ...formData,
+        createdAt: new Date(),
+        status: 'pending',
+      });
+      console.log('Document successfully written!');
+
+      nextStep();
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   return (
     <div className="m-6 text-center">
@@ -18,14 +35,16 @@ export const Summary = ({ formData, nextStep, prevStep }) => {
 
       <p className="mb-2">Customer</p>
       <p className="mb-4">
-        <strong>{formData.fname} {formData.lname}</strong>
+        <strong>
+          {formData.fname} {formData.lname}
+        </strong>
       </p>
 
       <div className="flex items-center justify-center gap-4 text-left">
         <div>
           <p className="mb-2">Service</p>
           <p className="mb-2">
-            <strong>{formData.package}</strong>
+            <strong>{formData.title}</strong>
           </p>
         </div>
         <div className="border-2 h-16 my-4"></div>
@@ -41,7 +60,7 @@ export const Summary = ({ formData, nextStep, prevStep }) => {
       <div className="py-2 px-10 flex justify-between">
         <strong>Total Price</strong>
         <strong>
-          <p>Rs {formData.packagePrice}.00</p>
+          <p>Rs {formData.price}.00</p>
         </strong>
       </div>
       <div className="border w-full my-4"></div>
