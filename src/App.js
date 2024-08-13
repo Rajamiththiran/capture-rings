@@ -1,24 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Homepage } from './pages/Homepage';
+import { Contactpage } from './pages/Contactpage';
+import { AboutUs } from './pages/AboutUs';
+import { Blog } from './pages/Blog';
+import { EventBooking } from './pages/EventBooking';
+import { Gallery } from './pages/Gallery';
+import { Shop } from './pages/Shop';
+import { Layout } from './components/AdminDashboard/Layout';
+import { Packages } from './components/AdminDashboard/Packages';
+import { Bookings } from './components/AdminDashboard/Bookings';
+import { Teams } from './components/AdminDashboard/Teams';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Homepage />} />
+        <Route path="/contact" element={<Contactpage />} />
+        <Route path="/about" element={<AboutUs />} />
+        <Route path="/blog" element={<Blog />} />
+        <Route path="/booking" element={<EventBooking />} />
+        <Route path="/gallery" element={<Gallery />} />
+        <Route path="/shop" element={<Shop />} />
+        {/* Admin Dashboard Routes */}
+        <Route path="/admin" element={<Layout />}>
+          <Route path="teams" element={<Teams />} />
+          <Route path="packages" element={<Packages />} />
+          <Route path="bookings" element={<Bookings />} />
+          {/* Add more admin routes as needed */}
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
