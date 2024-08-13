@@ -21,7 +21,7 @@ export const Gallery = () => {
   return (
     <section>
       <Header />
-      <div className="container mx-auto mt-20 px-6 md:px-36 py-12">
+      <div className="container mx-auto px-6 md:px-36 py-12">
         <h1 className="text-3xl md:text-5xl font-bold text-center mb-4 font-domine">
           Image Gallery
         </h1>

@@ -11,6 +11,7 @@ import { Layout } from './components/AdminDashboard/Layout';
 import { Packages } from './components/AdminDashboard/Packages';
 import { Bookings } from './components/AdminDashboard/Bookings';
 import { Teams } from './components/AdminDashboard/Teams';
+import { BlogManagement } from './components/AdminDashboard/BlogManagement';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           <Route path="teams" element={<Teams />} />
           <Route path="packages" element={<Packages />} />
           <Route path="bookings" element={<Bookings />} />
+          <Route path="blog-management" element={<BlogManagement />} />
           {/* Add more admin routes as needed */}
         </Route>
       </Routes>

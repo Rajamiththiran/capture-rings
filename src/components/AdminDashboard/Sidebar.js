@@ -19,6 +19,11 @@ const Sidebar = () => {
             Booking Details
           </Link>
         </li>
+        <li className="mb-4">
+          <Link to="/admin/blog-management" className="text-lg">
+            Blog Management
+          </Link>
+        </li>
         {/* Add more sidebar items here */}
       </ul>
     </aside>
