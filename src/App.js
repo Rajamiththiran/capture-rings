@@ -18,7 +18,7 @@ import { EventGallery } from './components/EventGallery';
 function App() {
   return (
     <BrowserRouter>
-      <Routes>
+      <Routes basename="/capture-rings">
         <Route path="/" element={<Homepage />} />
         <Route path="/contact" element={<Contactpage />} />
         <Route path="/about" element={<AboutUs />} />

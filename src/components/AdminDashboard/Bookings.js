@@ -48,6 +48,7 @@ export const Bookings = () => {
       <table className="table-auto w-full bg-white shadow-md border-collapse">
         <thead>
           <tr>
+            <th className="border px-4 py-2">Booking ID</th>
             <th className="border px-4 py-2">Name</th>
             <th className="border px-4 py-2">Package</th>
             <th className="border px-4 py-2">Amount</th>
@@ -59,6 +60,7 @@ export const Bookings = () => {
         <tbody>
           {bookings.map((booking) => (
             <tr key={booking.id}>
+              <td className="border px-4 py-2">{booking.id}</td>
               <td className="border px-4 py-2">
                 {booking.fname} {booking.lname}
               </td>
@@ -100,6 +102,9 @@ export const Bookings = () => {
         >
           <div className="bg-white p-8 max-w-md w-full rounded-lg shadow-lg">
             <h2 className="text-xl mb-4">Booking Details</h2>
+            <div className="mb-4">
+              <strong>Booking ID:</strong> {selectedBooking.id}
+            </div>
             <div className="mb-4">
               <strong>Name:</strong> {selectedBooking.fname}{' '}
               {selectedBooking.lname}

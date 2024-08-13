@@ -5,9 +5,10 @@ export const SuccessMessage = ({ formData }) => {
 
   return (
     <>
+    {console.log(formData)}
       <div className="text-center">
         {/* Add a image */}
-        <p className="text-lg text-gray-500 mb-4">Booking ID: </p>
+        <p className="text-lg text-gray-500 mb-4">Booking ID: {formData.id}</p>
         <h2 className="text-2xl font-bold mb-4">
           Your Appointment Booked successfully!
         </h2>
