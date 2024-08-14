@@ -1,15 +1,20 @@
-import React, { useState, useEffect } from 'react';
 import {
-  collection,
-  getDocs,
   addDoc,
-  updateDoc,
+  collection,
   deleteDoc,
   doc,
+  getDocs,
   serverTimestamp,
-} from 'firebase/firestore';
-import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
-import { db, storage } from '../../firebase/firebase-config';
+  updateDoc,
+} from "firebase/firestore";
+import {
+  deleteObject,
+  getDownloadURL,
+  ref,
+  uploadBytesResumable,
+} from "firebase/storage";
+import React, { useEffect, useState } from "react";
+import { db, storage } from "../../firebase/firebase-config";
 
 export const BlogManagement = () => {
   const [blogs, setBlogs] = useState([]);
@@ -17,46 +22,39 @@ export const BlogManagement = () => {
   const [editBlog, setEditBlog] = useState(null);
 
   useEffect(() => {
-    const fetchBlogs = async () => {
-      const querySnapshot = await getDocs(collection(db, 'blogs'));
-      setBlogs(
-        querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
-      );
-    };
-
     fetchBlogs();
   }, []);
 
+  const fetchBlogs = async () => {
+    const querySnapshot = await getDocs(collection(db, "blogs"));
+    setBlogs(querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+  };
+
   const handleAddEditBlog = async (data) => {
     if (editBlog) {
-      await updateDoc(doc(db, 'blogs', editBlog.id), {
+      await updateDoc(doc(db, "blogs", editBlog.id), {
         ...data,
         updatedAt: serverTimestamp(),
       });
     } else {
-      await addDoc(collection(db, 'blogs'), {
+      await addDoc(collection(db, "blogs"), {
         ...data,
         createdAt: serverTimestamp(),
       });
     }
     setIsModalOpen(false);
     setEditBlog(null);
-    await fetchBlogs(); // Reload blogs to reflect the new changes
+    await fetchBlogs();
   };
 
   const handleDeleteBlog = async (id) => {
-    await deleteDoc(doc(db, 'blogs', id));
+    await deleteDoc(doc(db, "blogs", id));
     setBlogs(blogs.filter((blog) => blog.id !== id));
   };
 
   const openModal = (blog = null) => {
     setEditBlog(blog);
     setIsModalOpen(true);
-  };
-
-  const fetchBlogs = async () => {
-    const querySnapshot = await getDocs(collection(db, 'blogs'));
-    setBlogs(querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
   };
 
   return (
@@ -113,11 +111,11 @@ export const BlogManagement = () => {
 };
 
 const BlogModal = ({ isOpen, onClose, onSave, blog }) => {
-  const [title, setTitle] = useState(blog?.title || '');
-  const [author, setAuthor] = useState(blog?.author || '');
-  const [excerpt, setExcerpt] = useState(blog?.excerpt || '');
+  const [title, setTitle] = useState(blog?.title || "");
+  const [author, setAuthor] = useState(blog?.author || "");
+  const [excerpt, setExcerpt] = useState(blog?.excerpt || "");
   const [imageFile, setImageFile] = useState(null);
-  const [imageUrl, setImageUrl] = useState(blog?.imageUrl || '');
+  const [imageUrl, setImageUrl] = useState(blog?.imageUrl || "");
   const [uploading, setUploading] = useState(false);
 
   const handleSubmit = async (e) => {
@@ -130,7 +128,7 @@ const BlogModal = ({ isOpen, onClose, onSave, blog }) => {
       setUploading(true);
 
       uploadTask.on(
-        'state_changed',
+        "state_changed",
         (snapshot) => {
           // Optional: Handle progress updates here
         },
@@ -152,9 +150,9 @@ const BlogModal = ({ isOpen, onClose, onSave, blog }) => {
 
             await onSave(blogData);
             setUploading(false);
-            onClose(); // Close the modal after upload and save
+            onClose();
           } catch (error) {
-            console.error('Error saving blog:', error);
+            console.error("Error saving blog:", error);
             setUploading(false);
           }
         }
@@ -162,14 +160,26 @@ const BlogModal = ({ isOpen, onClose, onSave, blog }) => {
     } else {
       const blogData = { title, author, excerpt, imageUrl };
       await onSave(blogData);
-      onClose(); // Close the modal if no image upload is required
+      onClose();
+    }
+  };
+
+  const handleRemoveImage = async () => {
+    if (imageUrl) {
+      try {
+        const imageRef = ref(storage, imageUrl);
+        await deleteObject(imageRef);
+        setImageUrl("");
+      } catch (error) {
+        console.error("Error removing image:", error);
+      }
     }
   };
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
       <div className="bg-white p-6 rounded-lg w-full max-w-md">
-        <h2 className="text-xl mb-4">{blog ? 'Edit Blog' : 'Add New Blog'}</h2>
+        <h2 className="text-xl mb-4">{blog ? "Edit Blog" : "Add New Blog"}</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label className="block text-gray-700">Title</label>
@@ -201,7 +211,23 @@ const BlogModal = ({ isOpen, onClose, onSave, blog }) => {
             />
           </div>
           <div className="mb-4">
-            <label className="block text-gray-700">Upload Image</label>
+            <label className="block text-gray-700">Image</label>
+            {imageUrl && (
+              <div className="relative mb-2">
+                <img
+                  src={imageUrl}
+                  alt="Blog"
+                  className="w-full h-40 object-cover"
+                />
+                <button
+                  type="button"
+                  className="absolute top-0 right-0 bg-red-500 text-white p-1 rounded-full"
+                  onClick={handleRemoveImage}
+                >
+                  X
+                </button>
+              </div>
+            )}
             <input
               type="file"
               onChange={(e) => setImageFile(e.target.files[0])}
@@ -224,11 +250,11 @@ const BlogModal = ({ isOpen, onClose, onSave, blog }) => {
             <button
               type="submit"
               className={`px-4 py-2 text-white rounded-lg ${
-                uploading ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-500'
+                uploading ? "bg-gray-400 cursor-not-allowed" : "bg-blue-500"
               }`}
               disabled={uploading}
             >
-              {uploading ? 'Uploading...' : blog ? 'Update' : 'Add'}
+              {uploading ? "Uploading..." : blog ? "Update" : "Add"}
             </button>
           </div>
         </form>
