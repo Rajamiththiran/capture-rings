@@ -1,24 +1,24 @@
-import React from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { Homepage } from './pages/Homepage';
-import { Contactpage } from './pages/Contactpage';
-import { AboutUs } from './pages/AboutUs';
-import { Blog } from './pages/Blog';
-import { EventBooking } from './pages/EventBooking';
-import { Gallery } from './pages/Gallery';
-import { Shop } from './pages/Shop';
-import { Layout } from './components/AdminDashboard/Layout';
-import { Packages } from './components/AdminDashboard/Packages';
-import { Bookings } from './components/AdminDashboard/Bookings';
-import { Teams } from './components/AdminDashboard/Teams';
-import { BlogManagement } from './components/AdminDashboard/BlogManagement';
-import { EventGalleryManagement } from './components/AdminDashboard/EventGalleryManagement';
-import { EventGallery } from './components/EventGallery';
+import React from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BlogManagement } from "./components/AdminDashboard/BlogManagement";
+import { Bookings } from "./components/AdminDashboard/Bookings";
+import { EventGalleryManagement } from "./components/AdminDashboard/EventGalleryManagement";
+import { Layout } from "./components/AdminDashboard/Layout";
+import { Packages } from "./components/AdminDashboard/Packages";
+import { Teams } from "./components/AdminDashboard/Teams";
+import { EventGallery } from "./components/EventGallery";
+import { AboutUs } from "./pages/AboutUs";
+import { Blog } from "./pages/Blog";
+import { Contactpage } from "./pages/Contactpage";
+import { EventBooking } from "./pages/EventBooking";
+import { Gallery } from "./pages/Gallery";
+import { Homepage } from "./pages/Homepage";
+import { Shop } from "./pages/Shop";
 
 function App() {
   return (
     <BrowserRouter>
-      <Routes basename="/capture-rings">
+      <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="/contact" element={<Contactpage />} />
         <Route path="/about" element={<AboutUs />} />
